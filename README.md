@@ -1,55 +1,112 @@
 # Smart Travel Planner Platform
 
-## Proje Açıklaması
-Bu proje, **SENG 324 - Software Design Patterns** dersi için geliştirilmiş bir seyahat planlama uygulamasıdır. Farklı şehirler arasında aktivite planlama ve hava durumu takibi yapmanıza olanak sağlar.
+## Project Description
 
-## 🎯 Projenin Amacı
-Yazılım tasarım desenlerinin gerçek dünyada nasıl uygulanacağını göstermek.
+This project was developed for the **SENG 324 - Software Design Patterns** course.
+The application allows users to create travel plans between cities, manage activities, and track real-time weather conditions.
 
-## 📋 Uygulanan Design Patterns
+## 🎯 Project Objective
 
-1. **Singleton** - `CityRepository` ile tekil şehir deposu
-2. **Strategy** - Ad, Nüfus ve Alan'a göre sıralama
-3. **Iterator** - Hava durumuna göre şehir filtreleme
-4. **Observer** - Real-time hava durumu güncellemeleri (3 saniye aralığı)
-5. **Decorator** - Aktivite ekleme (Müze, Alışveriş, Park, Şehir Merkezi)
-6. **Composite** - Hiyerarşik seyahat planı oluşturma
-7. **Command** - Geri al (Undo) / İleri al (Redo) işlevleri
+The main objective of this project is to demonstrate how software design patterns can be applied in a real-world desktop application.
 
-## 🖥️ GUI Bileşenleri
-- ✅ Şehir listesi ve sıralama kontrolleri
-- ✅ Hava durumuna göre filtreleme
-- ✅ Aktivite planlayıcı
-- ✅ Seyahat planı görüntüsü
-- ✅ Sıcaklık bar chart'ı
-- ✅ Hava durumu pie chart'ı
-- ✅ Undo/Redo butonları
+---
 
-## 📦 Teknolojiler
-- **Java 17**
-- **JavaFX** - GUI framework
-- **Maven** - Build tool
-- **Design Patterns** - Yazılım mimarisi
+## 📋 Implemented Design Patterns
 
-## 🚀 Kurulum ve Çalıştırma
+### 1. Singleton Pattern
 
-### Gereksinimler
-- Java 17+
-- Maven 3.8+
+Used in `CityRepository` to maintain a single shared city data source.
 
-### Çalıştırma
+### 2. Strategy Pattern
+
+Used for sorting cities by:
+
+* Name
+* Population
+* Area
+
+### 3. Iterator Pattern
+
+Used to filter cities according to weather conditions:
+
+* Sunny
+* Cloudy
+* Rainy
+* Snowy
+
+### 4. Observer Pattern
+
+Used for real-time weather updates every 3 seconds.
+
+### 5. Decorator Pattern
+
+Used for dynamically adding travel activities:
+
+* Museum Visit
+* Shopping Mall Visit
+* Park Visit
+* City Center Visit
+
+### 6. Composite Pattern
+
+Used to create hierarchical travel plans and activity structures.
+
+### 7. Command Pattern
+
+Used for:
+
+* Undo operations
+* Redo operations
+
+---
+
+## 🖥️ GUI Features
+
+* ✅ City list and sorting controls
+* ✅ Weather-based filtering
+* ✅ Activity planner
+* ✅ Travel plan visualization
+* ✅ Temperature bar chart
+* ✅ Weather distribution pie chart
+* ✅ Undo / Redo functionality
+
+---
+
+## 📦 Technologies Used
+
+* **Java 17**
+* **JavaFX**
+* **Maven**
+* **Object-Oriented Programming**
+* **Software Design Patterns**
+
+---
+
+## 🚀 Installation & Running
+
+### Requirements
+
+* Java 17+
+* Maven 3.8+
+
+### Run the Application
+
 ```bash
 cd smarttravelplanner
 mvn clean javafx:run
 ```
 
-### JAR Oluşturma
+### Build JAR File
+
 ```bash
 mvn clean package
 ```
 
-## 📂 Proje Yapısı
-```
+---
+
+## 📂 Project Structure
+
+```text
 src/main/java/com/travelplanner/
 ├── model/          (City, WeatherState)
 ├── repository/     (CityRepository - Singleton)
@@ -62,18 +119,29 @@ src/main/java/com/travelplanner/
 └── ui/             (TravelPlannerUI - Main GUI)
 ```
 
-## 👥 Özellikler
-- 🔄 Gerçek zamanlı hava durumu güncellemeleri
-- 💾 Geri Al/İleri Al işlevselliği
-- 📊 Dinamik grafikler
-- 🌍 Çok şehirli seyahat planlama
-- 🎯 Aktivite hiyerarşisi yönetimi
+---
 
-## 📝 Not
-Proje akademik amaçlar için geliştirilmiştir ve 7 temel yazılım tasarım deseninin uygulanmasını göstermektedir.
+## 👥 Team Members
+
+* **Beyza Gültekin**
+* **Şeyma Aslan**
 
 ---
-**Geliştirici**: Design Patterns Team  
-**Dersi**: SENG 324 - Software Design Patterns  
-**Üniversite**: Ankara Science University  
-**Yıl**: 2025-2026 Spring
+
+## ✨ Application Features
+
+* 🔄 Real-time weather updates
+* 💾 Undo / Redo support
+* 📊 Dynamic charts and statistics
+* 🌍 Multi-city travel planning
+* 🎯 Hierarchical activity management
+
+---
+
+## 📝 Academic Information
+
+This project was developed for academic purposes to demonstrate the implementation of fundamental software design patterns in Java.
+
+**Course:** SENG 324 - Software Design Patterns
+**University:** Ankara Science University
+**Term:** 2025-2026 Spring Semester
