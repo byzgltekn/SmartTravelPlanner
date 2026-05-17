@@ -20,7 +20,7 @@ public class ActivityPlan implements PlanComponent {
     }
 
     public List<PlanComponent> getComponents() {
-        return new ArrayList<>(components);
+        return components;  // Return direct reference for Command pattern to work correctly
     }
 
     @Override

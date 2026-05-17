@@ -41,6 +41,12 @@ public class TravelPlannerUI extends BorderPane implements WeatherObserver {
     private Canvas weatherDistributionChart;
     private Button undoButton;
     private Button redoButton;
+    
+    // Activity Checkboxes (for UI synchronization)
+    private CheckBox museumCheckBox;
+    private CheckBox mallCheckBox;
+    private CheckBox parkCheckBox;
+    private CheckBox centerCheckBox;
 
     // Data
     private Map<City, ActivityPlan> cityPlans;
@@ -180,28 +186,28 @@ public class TravelPlannerUI extends BorderPane implements WeatherObserver {
         activityGrid.setHgap(5);
         activityGrid.setVgap(5);
 
-        CheckBox museumCheckBox = new CheckBox("Museum ($15, 2h)");
+        museumCheckBox = new CheckBox("Museum ($15, 2h)");
         museumCheckBox.setOnAction(e -> {
             if (selectedCity != null) {
                 addActivity("Museum", 15, 2, museumCheckBox.isSelected());
             }
         });
 
-        CheckBox mallCheckBox = new CheckBox("Shopping Mall ($20, 3h)");
+        mallCheckBox = new CheckBox("Shopping Mall ($20, 3h)");
         mallCheckBox.setOnAction(e -> {
             if (selectedCity != null) {
                 addActivity("Shopping Mall", 20, 3, mallCheckBox.isSelected());
             }
         });
 
-        CheckBox parkCheckBox = new CheckBox("Park ($5, 1.5h)");
+        parkCheckBox = new CheckBox("Park ($5, 1.5h)");
         parkCheckBox.setOnAction(e -> {
             if (selectedCity != null) {
                 addActivity("Park", 5, 1.5, parkCheckBox.isSelected());
             }
         });
 
-        CheckBox centerCheckBox = new CheckBox("City Center ($10, 1h)");
+        centerCheckBox = new CheckBox("City Center ($10, 1h)");
         centerCheckBox.setOnAction(e -> {
             if (selectedCity != null) {
                 addActivity("City Center", 10, 1, centerCheckBox.isSelected());
@@ -322,6 +328,7 @@ public class TravelPlannerUI extends BorderPane implements WeatherObserver {
                 currentRootPlan = cityPlans.get(city);
             }
             updatePlanDisplay();
+            synchronizeActivityCheckboxes();
         }
     }
 
@@ -332,6 +339,11 @@ public class TravelPlannerUI extends BorderPane implements WeatherObserver {
             ActivityLeaf leaf = new ActivityLeaf(name, cost, duration);
             AddActivityCommand command = new AddActivityCommand(currentRootPlan.getComponents(), leaf);
             commandHistory.execute(command);
+            System.out.println("✓ Added: " + name + " ($" + cost + ", " + duration + "h) | Total items: " + currentRootPlan.getComponents().size());
+        } else {
+            // Removing activity
+            currentRootPlan.getComponents().removeIf(c -> c.getName().equals(name));
+            System.out.println("✗ Removed: " + name + " | Total items: " + currentRootPlan.getComponents().size());
         }
         updateUI();
     }
@@ -390,8 +402,16 @@ public class TravelPlannerUI extends BorderPane implements WeatherObserver {
             gc.setFill(Color.web("#3498db"));
             gc.fillRect(x, y, barWidth - 10, barHeight);
 
+            // Draw rotated city names
+            gc.save();
+            double textX = padding + i * barWidth + barWidth / 2;
+            double textY = height - padding + 5;
+            gc.translate(textX, textY);
+            gc.rotate(45);
             gc.setFill(Color.BLACK);
-            gc.fillText(city.getName(), x, height - 10);
+            gc.setFont(javafx.scene.text.Font.font(9));
+            gc.fillText(city.getName(), 0, 0);
+            gc.restore();
         }
 
         // Draw axes
@@ -457,12 +477,64 @@ public class TravelPlannerUI extends BorderPane implements WeatherObserver {
     }
 
     private void updateUI() {
+        synchronizeActivityCheckboxes();
         updateTemperatureChart();
         updateWeatherChart();
         updatePlanDisplay();
         undoButton.setDisable(!commandHistory.canUndo());
         redoButton.setDisable(!commandHistory.canRedo());
         applyWeatherFilter();
+    }
+    
+    private void synchronizeActivityCheckboxes() {
+        if (currentRootPlan == null) {
+            // No plan selected, uncheck all
+            museumCheckBox.setSelected(false);
+            mallCheckBox.setSelected(false);
+            parkCheckBox.setSelected(false);
+            centerCheckBox.setSelected(false);
+            return;
+        }
+        
+        // Get activity names from current plan
+        List<String> planActivities = new ArrayList<>();
+        for (PlanComponent component : currentRootPlan.getComponents()) {
+            planActivities.add(component.getName());
+        }
+        
+        // Temporarily disable listeners to prevent triggering addActivity
+        museumCheckBox.setOnAction(null);
+        mallCheckBox.setOnAction(null);
+        parkCheckBox.setOnAction(null);
+        centerCheckBox.setOnAction(null);
+        
+        // Synchronize checkbox states with plan
+        museumCheckBox.setSelected(planActivities.contains("Museum"));
+        mallCheckBox.setSelected(planActivities.contains("Shopping Mall"));
+        parkCheckBox.setSelected(planActivities.contains("Park"));
+        centerCheckBox.setSelected(planActivities.contains("City Center"));
+        
+        // Re-enable listeners
+        museumCheckBox.setOnAction(e -> {
+            if (selectedCity != null) {
+                addActivity("Museum", 15, 2, museumCheckBox.isSelected());
+            }
+        });
+        mallCheckBox.setOnAction(e -> {
+            if (selectedCity != null) {
+                addActivity("Shopping Mall", 20, 3, mallCheckBox.isSelected());
+            }
+        });
+        parkCheckBox.setOnAction(e -> {
+            if (selectedCity != null) {
+                addActivity("Park", 5, 1.5, parkCheckBox.isSelected());
+            }
+        });
+        centerCheckBox.setOnAction(e -> {
+            if (selectedCity != null) {
+                addActivity("City Center", 10, 1, centerCheckBox.isSelected());
+            }
+        });
     }
 
     public void shutdown() {

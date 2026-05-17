@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Istanbul",
+    "population": 15190000,
+    "area": 5343,
+    "currentTemperature": 22.5,
+    "currentWeatherState": "CLOUDY"
+  },
+  {
+    "name": "Ankara",
+    "population": 5663000,
+    "area": 25632,
+    "currentTemperature": 18.0,
+    "currentWeatherState": "SUNNY"
+  },
+  {
+    "name": "Izmir",
+    "population": 4367000,
+    "area": 11891,
+    "currentTemperature": 25.3,
+    "currentWeatherState": "SUNNY"
+  },
+  {
+    "name": "Bursa",
+    "population": 3056000,
+    "area": 10956,
+    "currentTemperature": 20.1,
+    "currentWeatherState": "RAINY"
+  },
+  {
+    "name": "Antalya",
+    "population": 2533000,
+    "area": 20191,
+    "currentTemperature": 28.7,
+    "currentWeatherState": "SUNNY"
+  },
+  {
+    "name": "Gaziantep",
+    "population": 2087000,
+    "area": 3732,
+    "currentTemperature": 26.5,
+    "currentWeatherState": "SUNNY"
+  },
+  {
+    "name": "Konya",
+    "population": 2223000,
+    "area": 38823,
+    "currentTemperature": 15.2,
+    "currentWeatherState": "CLOUDY"
+  },
+  {
+    "name": "Kayseri",
+    "population": 1374000,
+    "area": 16917,
+    "currentTemperature": 14.8,
+    "currentWeatherState": "SNOWY"
+  },
+  {
+    "name": "Samsun",
+    "population": 1344000,
+    "area": 9562,
+    "currentTemperature": 16.3,
+    "currentWeatherState": "RAINY"
+  },
+  {
+    "name": "Diyarbakir",
+    "population": 912000,
+    "area": 8796,
+    "currentTemperature": 27.1,
+    "currentWeatherState": "SUNNY"
+  },
+  {
+    "name": "Mersin",
+    "population": 1746000,
+    "area": 15853,
+    "currentTemperature": 26.9,
+    "currentWeatherState": "SUNNY"
+  },
+  {
+    "name": "Eskisehir",
+    "population": 873000,
+    "area": 13957,
+    "currentTemperature": 17.5,
+    "currentWeatherState": "CLOUDY"
+  }
+]
