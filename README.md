@@ -15,7 +15,7 @@
 
 This project was developed for the **SENG 324 - Software Design Patterns** course.
 The application allows users to create travel plans between cities, manage activities, and track real-time weather conditions.
-
+s
 ## 🎯 Project Objective
 
 The main objective of this project is to demonstrate how software design patterns can be applied in a real-world desktop application.
